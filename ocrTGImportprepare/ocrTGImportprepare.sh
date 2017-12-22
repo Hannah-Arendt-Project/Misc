@@ -8,7 +8,7 @@
 # * creates a folder Faksimilies with subfolders for each literature
 # * creates a TEI_OCR folder with subfolders for each literature
 #
-# Requirements: Java runtime or SDK 1.8+, sed, ImageMagick
+# Requirements: Java runtime or SDK 1.8+, sed, awk, ImageMagick
 # License: Apache 2.0
 # Author: Johannes Biermann
 #
@@ -67,7 +67,7 @@ cp -a $SRCDIR $DESTDIR
 # next Run the OCR2TEI programm on DESTDIR
 
 echo "Running OCR2TEI converter on $DESTDIR"
-java -jar ocr2tei-$OCRTEIVERSION.jar dir -d $DESTDIR -f -s
+java -Xmx4G -jar ocr2tei-$OCRTEIVERSION.jar dir -d $DESTDIR -f -s
 
 basedir=$(basename $SRCDIR)
 echo "Creating Faksimilies and TEI_OCR dir in $DESTDIR"
