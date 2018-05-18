@@ -8,7 +8,7 @@
 # * creates a folder Faksimilies with subfolders for each literature
 # * creates a TEI_OCR folder with subfolders for each literature
 #
-# Requirements: Java runtime or SDK 1.8+, sed, awk, ImageMagick
+# Requirements: Java runtime or SDK 1.8+, sed, ImageMagick
 # License: Apache 2.0
 # Author: Johannes Biermann
 #
@@ -84,7 +84,12 @@ find $DESTDIR/$basedir/* -prune -type d | while IFS= read -r d; do
 	   echo "creating $curdir in Faksimilies dir"
 	   mkdir $DESTDIR/$basedir/Faksimilies/$curdir
 	   echo "converting $d/Arendt*/* to JPEG"
-	   convert $d/Arendt*/* -set filename: "%t" $DESTDIR/$basedir/Faksimilies/$curdir/%[filename:].jpg
+	   #convert $d/Arendt*/* -set filename: "%t" $DESTDIR/$basedir/Faksimilies/$curdir/%[filename:].jpg
+	   for imagefile in $d/Arendt*/*; do
+	   	 echo "Processing $imagefile"
+         convert $imagefile -set filename: "%t" $DESTDIR/$basedir/Faksimilies/$curdir/%[filename:].jpg
+       done
+	   
 	   echo "creating $curdir in TEI_OCR dir"
 	   mkdir $DESTDIR/$basedir/TEI_OCR/$curdir
 	   
